@@ -1,9 +1,9 @@
 {
-  "name": "genshin-wish-export",
-  "version": "0.9.10",
+  "name": "exilium-recruit-export",
+  "version": "0.1.0",
   "main": "./dist/electron/main/main.js",
-  "author": "biuuu <https://github.com/biuuu>",
-  "homepage": "https://github.com/biuuu/genshin-wish-export",
+  "author": "Lipi <https://github.com/EtherealAO>",
+  "homepage": "https://github.com/EtherealAO/exilium-recruit-export",
   "license": "MIT",
   "scripts": {
     "dev": "node .electron-vite/dev-runner.js",
@@ -34,8 +34,8 @@
         "url": "http://127.0.0.1"
       }
     ],
-    "productName": "Genshin Wish Export",
-    "appId": "org.biuuu.genshin-wish-export",
+    "productName": "Exilium Recruit Export",
+    "appId": "app.shuise.exilium-recruit-export",
     "directories": {
       "output": "build"
     },

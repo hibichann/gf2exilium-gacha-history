@@ -18,37 +18,44 @@ const createZip = (filePath, dest) => {
 }
 
 const start = async () => {
-  copyAppZip()
-  const appPath = './build/win-unpacked/resources/app'
-  const name = 'app.zip'
-  const outputPath = path.resolve('./build/update/update/')
-  const zipPath = path.resolve(outputPath, name)
-  await fs.ensureDir(outputPath)
-  await fs.emptyDir(outputPath)
-  await fs.outputFile('./build/update/CNAME', 'genshin-gacha-export.danmu9.com')
-  createZip(appPath, zipPath)
-  const buffer = await fs.readFile(zipPath)
-  const sha256 = hash(buffer)
-  const hashName = sha256.slice(7, 12)
-  await fs.copy(zipPath, path.resolve(outputPath, `${hashName}.zip`))
-  await fs.remove(zipPath)
-  await fs.outputJSON(path.join(outputPath, 'manifest.json'), {
+  return;
+  copyAppZip();
+  const appPath = "./build/win-unpacked/resources/app";
+  const name = "app.zip";
+  const outputPath = path.resolve("./build/update/update/");
+  const zipPath = path.resolve(outputPath, name);
+  await fs.ensureDir(outputPath);
+  await fs.emptyDir(outputPath);
+  await fs.outputFile(
+    "./build/update/CNAME",
+    "genshin-gacha-export.danmu9.com"
+  );
+  createZip(appPath, zipPath);
+  const buffer = await fs.readFile(zipPath);
+  const sha256 = hash(buffer);
+  const hashName = sha256.slice(7, 12);
+  await fs.copy(zipPath, path.resolve(outputPath, `${hashName}.zip`));
+  await fs.remove(zipPath);
+  await fs.outputJSON(path.join(outputPath, "manifest.json"), {
     active: true,
     version,
-    from: '0.1.5',
+    from: "0.1.5",
     name: `${hashName}.zip`,
-    hash: sha256
-  })
-  copyHTML()
-}
+    hash: sha256,
+  });
+  copyHTML();
+};
 
 const copyAppZip = () => {
   try {
-    const dir = path.resolve('./build')
-    const filePath = path.resolve(dir, `Genshin Wish Export-${version}-win.zip`)
-    fs.copySync(filePath, path.join(dir, 'app.zip'))
+    const dir = path.resolve("./build");
+    const filePath = path.resolve(
+      dir,
+      `Exilium Recruit Export-${version}-win.zip`
+    );
+    fs.copySync(filePath, path.join(dir, "app.zip"));
   } catch (e) {}
-}
+};
 
 const copyHTML = () => {
   try {

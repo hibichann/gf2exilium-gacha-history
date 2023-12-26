@@ -70,7 +70,7 @@
     </el-form>
     <h3 class="text-lg my-4">{{about.title}}</h3>
     <p class="text-gray-600 text-xs mt-1">{{about.license}}</p>
-    <p class="text-gray-600 text-xs mt-1 pb-6">Github: <a @click="openGithub" class="cursor-pointer text-blue-400">https://github.com/biuuu/genshin-wish-export</a></p>
+      <p class="text-gray-600 text-xs mt-1 pb-6">Github: <a @click="openGithub" class="cursor-pointer text-blue-400">https://github.com/EtherealAO/exilium-recruit-export</a></p>
   </div>
 </template>
 
@@ -121,7 +121,7 @@ const disableProxy = async () => {
   await ipcRenderer.invoke('DISABLE_PROXY')
 }
 
-const openGithub = () => shell.openExternal('https://github.com/biuuu/genshin-wish-export')
+const openGithub = () => shell.openExternal('https://github.com/EtherealAO/exilium-recruit-export')
 const openLink = (link) => shell.openExternal(link)
 
 const exportUIGFJSON = () => {
