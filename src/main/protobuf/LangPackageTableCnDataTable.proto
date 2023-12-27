@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+message LangPackageTableCnDataTable {
+    repeated LangPackageTableCnData Data = 1;
+}
+
+message LangPackageTableCnData {
+    int64 Id = 1;
+    string Content = 2;
+}

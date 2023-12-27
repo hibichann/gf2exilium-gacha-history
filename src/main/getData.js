@@ -18,9 +18,9 @@ const config = require("./config");
 const i18n = require("./i18n");
 const { enableProxy, disableProxy } = require("./module/system-proxy");
 const mitmproxy = require("./module/node-mitmproxy");
+const { NameRarityDictionary } = require("./datatable");
 
 const dataMap = new Map();
-let apiDomain = "https://gf2-gacha-record.sunborngame.com";
 
 const saveData = async (data, url) => {
   const obj = Object.assign({}, data);
@@ -237,9 +237,6 @@ const getGachaLog = async ({ gachaType, fragment, name, retryCount, ua }) => {
     fragment === ""
       ? `type_id=${gachaType}`
       : `next=${fragment}&type_id=${gachaType}`;
-  console.log(
-    `gachaType ${gachaType} frag ${fragment} URL ${ua.url} AT ${ua.accessToken} PL ${payload}`
-  );
   try {
     const res = await request(ua, payload);
     return [res.data.list, res.data.next];
@@ -423,7 +420,15 @@ const fetchData = async () => {
   for (const type of defaultTypeMap) {
     const list = await getGachaLogs(type[0], type[1], account, ua);
     const logs = list.map((item) => {
-      return [item.item, item.pool_id, item.time];
+      var tabledata = NameRarityDictionary[item.item];
+      return [
+        item.item,
+        tabledata.name,
+        tabledata.rank,
+        tabledata.isCharacter,
+        item.pool_id,
+        item.time,
+      ];
     });
     logs.reverse();
     typeMap.set(type[0], type[1]);

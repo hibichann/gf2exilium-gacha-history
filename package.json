@@ -1,6 +1,6 @@
 {
   "name": "exilium-recruit-export",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "main": "./dist/electron/main/main.js",
   "author": "Lipi <https://github.com/EtherealAO>",
   "homepage": "https://github.com/EtherealAO/exilium-recruit-export",
@@ -69,7 +69,9 @@
       "icon": "build/icons"
     }
   },
-  "dependencies": {},
+  "dependencies": {
+    "protobufjs": "^7.2.5"
+  },
   "devDependencies": {
     "@element-plus/icons-vue": "^0.2.6",
     "@rollup/plugin-alias": "^3.1.9",

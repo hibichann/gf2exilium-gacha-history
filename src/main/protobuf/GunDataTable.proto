@@ -1,0 +1,82 @@
+syntax = "proto3";
+
+message GunDataTable {
+    repeated GunData Data = 1;
+}
+
+message GunData {
+    uint32 Id = 1;
+    LanguageStringData Name = 2;
+    LanguageStringData FirstName = 3;
+    LanguageStringData SecondName = 4;
+    LanguageStringData EnName = 5;
+    LanguageStringData Introduce = 6;
+    LanguageStringData Dialogue = 7;
+    LanguageStringData Extra = 8;
+    string Code = 9;
+    int32 Type = 10;
+    uint32 CharacterId = 11;
+    uint32 GetAudio = 12;
+    int32 Duty = 13;
+    uint32 SecondDuty = 14;
+    int32 Rank = 15;
+    uint32 RoleTemplateId = 16;
+    uint32 CoreItemId = 17;
+    LanguageStringData UpgradeSpeech = 18;
+    uint32 SkillNormalAttack = 19;
+    repeated uint32 SkillActiveExtra = 20;
+    repeated uint32 SkillTalentExtra = 21;
+    repeated int32 AiList = 22;
+    uint32 Element = 23;
+    uint32 WeaponType = 24;
+    repeated uint32 WeaponPrivate = 25;
+    repeated uint32 WeaponPrivateShow = 26;
+    uint32 WeaponDefault = 27;
+    uint32 MoveCode = 28;
+    map<uint32, uint32> SoldGet1 = 29;
+    uint32 SystemSwitch = 30;
+    bool UseFakeAttack = 31;
+    uint32 Camp = 32;
+    uint32 DefaultGrade = 33;
+    uint32 UnlockCost = 34;
+    uint32 Grade = 35;
+    uint32 GunClass = 36;
+    string BarrackCameraSetting = 37;
+    uint32 Avatar = 38;
+    uint32 CostumeId = 39;
+    repeated uint32 CostumeReplace = 40;
+    uint32 PropertyId = 41;
+    repeated uint32 BarrackEffectId = 42;
+    uint32 Weight = 43;
+    uint32 BarrackAudioId = 44;
+    uint32 ShieldType = 45;
+    uint32 MaxGrade = 46;
+    uint32 ShieldEffectId = 47;
+    uint32 BaseSupply = 48;
+    repeated uint32 SupplyTypeBanList = 49;
+    uint32 ExtraSkill = 50;
+    uint32 ShieldBrokenEffectId = 51;
+    uint32 AttackType = 52;
+    string GachaGetTimeline = 53;
+    repeated int32 BeSuppressedConfig = 54;
+    uint32 Shape = 55;
+    string ShapeParam = 56;
+    string ShapeIcon = 57;
+    uint32 ShapeTerrain = 58;
+    uint32 IdleType = 59;
+    uint32 Displacement = 60;
+    bool IsHide = 61;
+    string WeakTag = 62;
+    string SuppressGroup = 63;
+    uint32 UnlockHint = 64;
+    repeated uint32 UnlockDorm = 65;
+    int32 GuardRadius = 66;
+    int32 GuardRadiusShow = 67;
+    uint32 GachaGetAudio = 68;
+    uint32 GachaGetVoice = 69;
+    int32 WeakWeaponTag = 70;
+}
+
+message LanguageStringData {
+	int64 Id = 1;
+}
