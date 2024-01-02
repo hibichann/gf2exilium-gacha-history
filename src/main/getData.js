@@ -94,27 +94,15 @@ const compareList = (b, a) => {
 const mergeList = (a, b) => {
   if (!a || !a.length) return b || [];
   if (!b || !b.length) return a;
-  const minA = new Date(a[0][0]).getTime();
-  const idA = a[0][5];
+  const minA = new Date(a[0][5]).getTime();
   let pos = b.length;
-  let idFounded = false;
-  for (let i = b.length - 1; i >= 0; i--) {
-    let idB = b[i][5];
-    if (idB && idB === idA) {
-      pos = i;
-      idFounded = true;
-      break;
-    }
-  }
-  if (!idFounded) {
-    let width = Math.min(11, a.length, b.length);
-    for (let i = 0; i < b.length; i++) {
-      const time = new Date(b[i][0]).getTime();
-      if (time >= minA) {
-        if (compareList(b.slice(i, width + i), a.slice(0, width))) {
-          pos = i;
-          break;
-        }
+  let width = Math.min(11, a.length, b.length);
+  for (let i = 0; i < b.length; i++) {
+    const time = new Date(b[i][5]).getTime();
+    if (time >= minA) {
+      if (compareList(b.slice(i, width + i), a.slice(0, width))) {
+        pos = i;
+        break;
       }
     }
   }
