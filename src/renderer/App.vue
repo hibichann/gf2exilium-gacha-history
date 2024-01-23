@@ -25,8 +25,8 @@
           <template #dropdown>
             <el-dropdown-menu>
               <el-dropdown-item command="setting" icon="setting">{{ui.button.setting}}</el-dropdown-item>
-              <el-dropdown-item :disabled="!allowClick() || state.status === 'loading'" command="url" icon="link">{{ui.button.url}}</el-dropdown-item>
-              <el-dropdown-item :disabled="!allowClick() || state.status === 'loading'" command="proxy" icon="position">{{ui.button.startProxy}}</el-dropdown-item>
+                <!--<el-dropdown-item :disabled="!allowClick() || state.status === 'loading'" command="url" icon="link">{{ui.button.url}}</el-dropdown-item>
+              <el-dropdown-item :disabled="!allowClick() || state.status === 'loading'" command="proxy" icon="position">{{ui.button.startProxy}}</el-dropdown-item> -->
               <el-dropdown-item command="copyUrl" icon="DocumentCopy">{{ui.button.copyUrl}}</el-dropdown-item>
             </el-dropdown-menu>
           </template>

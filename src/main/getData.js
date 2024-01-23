@@ -21,6 +21,7 @@ const mitmproxy = require("./module/node-mitmproxy");
 const { NameRarityDictionary } = require("./datatable");
 
 const dataMap = new Map();
+var gachaUrl;
 
 const saveData = async (data, url) => {
   const obj = Object.assign({}, data);
@@ -186,8 +187,9 @@ const readLog = async () => {
         .split(/\r?\n/)
         .reverse();
       const addr = logText
-        .find((x) => x.startsWith("设置扭蛋记录地址 "))
-        .replace("设置扭蛋记录地址 ", "");
+        .find((x) => x.startsWith("扭蛋记录 Url = "))
+        .replace("扭蛋记录 Url = ", "");
+      gachaUrl = addr;
       const accessTokenLine = logText
         .find((x) =>
           x.startsWith(
@@ -202,7 +204,6 @@ const readLog = async () => {
     const result = await Promise.all(promises);
     for (let url of result) {
       if (url) {
-        console.log(`Found Url ${url.url} AT ${url.accessToken}`);
         return url;
       }
     }
@@ -497,7 +498,7 @@ ipcMain.handle("OPEN_CACHE_FOLDER", () => {
 });
 
 ipcMain.handle("COPY_URL", async () => {
-  const url = await getUrl();
+  const url = gachaUrl;
   if (url) {
     clipboard.writeText(url);
     return true;

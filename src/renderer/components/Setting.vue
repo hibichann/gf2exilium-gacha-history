@@ -11,7 +11,7 @@
         </el-select>
         <p class="text-gray-400 text-xs m-1.5">{{text.languageHint}}</p>
       </el-form-item>
-      <el-form-item :label="text.logType">
+            <!--<el-form-item :label="text.logType">
         <el-radio-group @change="saveSetting" v-model.number="settingForm.logType">
           <el-radio-button :label="0">{{text.auto}}</el-radio-button>
           <el-radio-button :label="1">{{text.cnServer}}</el-radio-button>
@@ -19,27 +19,27 @@
           <el-radio-button v-if="settingForm.lang === 'zh-cn'" :label="3">云原神</el-radio-button>
         </el-radio-group>
         <p class="text-gray-400 text-xs m-1.5">{{text.logTypeHint}}</p>
-      </el-form-item>
-      <el-form-item :label="text.autoUpdate">
-        <el-switch
-          @change="saveSetting"
-          v-model="settingForm.autoUpdate">
-        </el-switch>
-      </el-form-item>
-      <el-form-item :label="text.hideNovice">
-        <el-switch
-          @change="saveSetting"
-          v-model="settingForm.hideNovice">
-        </el-switch>
-      </el-form-item>
-      <el-form-item :label="text.fetchFullHistory">
-        <el-switch
-          @change="saveSetting"
-          v-model="settingForm.fetchFullHistory">
-        </el-switch>
-        <p class="text-gray-400 text-xs m-1.5">{{text.fetchFullHistoryHint}}</p>
-      </el-form-item>
-      <el-form-item :label="text.proxyMode">
+      </el-form-item>-->
+            <el-form-item :label="text.autoUpdate">
+              <el-switch
+                @change="saveSetting"
+                v-model="settingForm.autoUpdate">
+              </el-switch>
+            </el-form-item>
+            <el-form-item :label="text.hideNovice">
+              <el-switch
+                @change="saveSetting"
+                v-model="settingForm.hideNovice">
+              </el-switch>
+            </el-form-item>
+            <el-form-item :label="text.fetchFullHistory">
+              <el-switch
+                @change="saveSetting"
+                v-model="settingForm.fetchFullHistory">
+              </el-switch>
+              <p class="text-gray-400 text-xs m-1.5">{{ text.fetchFullHistoryHint }}</p>
+            </el-form-item>
+            <!--<el-form-item :label="text.proxyMode">
         <el-switch
           @change="saveSetting"
           v-model="settingForm.proxyMode">
@@ -47,17 +47,15 @@
         <p class="text-gray-400 text-xs m-1.5">{{text.proxyModeHint}}</p>
         <el-button class="focus:outline-none" @click="disableProxy">{{text.closeProxy}}</el-button>
         <p class="text-gray-400 text-xs m-1.5">{{text.closeProxyHint}}</p>
-      </el-form-item>
-      <el-form-item v-if="settingForm.lang === 'zh-cn'" label="导出到其它工具">
-        <div class="flex space-x-2">
-          <el-button @click="exportUIGFJSON" type="success" plain class="focus:outline-none">导出JSON</el-button>
-          <el-checkbox @change="saveSetting" v-model="settingForm.readableJSON">可读</el-checkbox>
-        </div>
-        <p class="text-gray-400 text-xs m-1.5 leading-normal">该功能用于导出数据到其它抽卡记录管理工具，仅支持简体中文模式。<br>支持的工具参考这个链接：
-          <a class="cursor-pointer text-blue-400" @click="openLink('https://uigf.org/standards/UIGF.html')">统一可交换祈愿记录标准</a>
-        </p>
-      </el-form-item>
-      <!-- <el-form-item label="导出到Github Gists">
+      </el-form-item>-->
+          <el-form-item v-if="settingForm.lang === 'zh-cn'" label="导出到其它工具">
+            <div class="flex space-x-2">
+              <el-button @click="exportUIGFJSON" type="success" plain class="focus:outline-none">导出JSON</el-button>
+                <!--<el-checkbox @change="saveSetting" v-model="settingForm.readableJSON">可读</el-checkbox>-->
+              </div>
+              <p class="text-gray-400 text-xs m-1.5 leading-normal">该功能用于导出数据到其它抽卡记录管理工具，仅支持简体中文模式。</p>
+          </el-form-item>
+          <!-- <el-form-item label="导出到Github Gists">
         <el-input placeholder="请输入内容" v-model="settingForm.gistsToken" :disabled="gistsConfigDisabled" style="max-width: 500px;">
           <template #append>
             <el-button v-show="gistsConfigDisabled" @click="configGistsToken">设置Token</el-button>
@@ -67,10 +65,12 @@
         <p class="text-gray-400 text-xs m-1.5 leading-normal">该功能用于将抽卡记录导出为UIGF JSON格式并同步至Github Gists，单击“设置Token”按钮，本地浏览器将会跳转至GithubTokens设置页面，新增您的个人Token，并打开Gists功能的读写权限，最后将新生成的Token存入这里，单击“保存Token”完成设置</p>
         <el-button @click="uploadGists" type="success" plain class="focus:outline-none" :disabled="!settingForm.gistsToken" :loading="uploadGistsLoading">同步至Gists</el-button>
       </el-form-item> -->
-    </el-form>
-    <h3 class="text-lg my-4">{{about.title}}</h3>
-    <p class="text-gray-600 text-xs mt-1">{{about.license}}</p>
-      <p class="text-gray-600 text-xs mt-1 pb-6">Github: <a @click="openGithub" class="cursor-pointer text-blue-400">https://github.com/EtherealAO/exilium-recruit-export</a></p>
+        </el-form>
+        <h3 class="text-lg my-4">{{ about.title }}</h3>
+        <p class="text-gray-600 text-xs mt-1">{{ about.license }}</p>
+          <p class="text-gray-600 text-xs mt-1 pb-6">Github: <a @click="openGithub" class="cursor-pointer text-blue-400">https://github.com/EtherealAO/exilium-recruit-export</a></p>
+        <p class="text-gray-600 text-xs mt-1 pb-6">Fork of: <a @click="openGithub2" class="cursor-pointer text-blue-400">https://github
+.com/biuuu/genshin-wish-export</a></p>
   </div>
 </template>
 
@@ -122,6 +122,7 @@ const disableProxy = async () => {
 }
 
 const openGithub = () => shell.openExternal('https://github.com/EtherealAO/exilium-recruit-export')
+const openGithub2 = () => shell.openExternal('https://github.com/biuuu/genshin-wish-export')
 const openLink = (link) => shell.openExternal(link)
 
 const exportUIGFJSON = () => {
