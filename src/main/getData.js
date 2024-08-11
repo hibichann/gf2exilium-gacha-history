@@ -212,16 +212,20 @@ const readLog = async () => {
       // Gacha record address is most likely the following, but implemented a regex search function just in case.
       // const addr = "https://gf2-gacha-record.sunborngame.com/list";
       gachaUrl = addr;
-      const accessTokenLine = logText
-        .find((x) =>
+      const accessTokenLineIndex = logText
+        .findIndex((x) =>
           x.startsWith(
             'Response = {"code":0,"msg":"OK","data":{"access_token":"'
           )
         )
-        .replace("Response = ", "");
+      // 取登录用户接口入参做账号
+      const loginParasLine = logText[accessTokenLineIndex + 1].replace("jsonParamsStr = ", "");
+      const loginParasJson = JSON.parse(loginParasLine)
+      const account = loginParasJson.phone_number || loginParasJson.email
+      const accessTokenLine = logText[accessTokenLineIndex].replace("Response = ", "");
       const accessTokenJson = JSON.parse(accessTokenLine);
       const accessToken = accessTokenJson.data.access_token;
-      return { url: addr, accessToken: accessToken };
+      return { url: addr, accessToken: accessToken, account};
     });
     const result = await Promise.all(promises);
     for (let url of result) {
@@ -424,7 +428,7 @@ const fetchData = async () => {
     sendMsg(message);
     throw new Error(message);
   }
-  const account = searchParams.get("u");
+  const account = ua.account;
 
   const result = new Map();
   const typeMap = new Map();
