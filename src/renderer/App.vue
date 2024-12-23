@@ -2,67 +2,78 @@
   <div v-if="ui" class="relative">
     <div class="flex justify-between">
       <div>
-        <el-button type="primary" :icon="state.status === 'init' ? 'milk-tea': 'refresh-right'" class="focus:outline-none" :disabled="!allowClick()" plain @click="fetchData()" :loading="state.status === 'loading'">{{state.status === 'init' ? ui.button.load: ui.button.update}}</el-button>
-        <el-button icon="folder-opened" @click="saveExcel" class="focus:outline-none" :disabled="!gachaData"  type="success" plain>{{ui.button.excel}}</el-button>
+        <el-button type="primary" :icon="state.status === 'init' ? 'milk-tea' : 'refresh-right'"
+          class="focus:outline-none" :disabled="!allowClick()" plain @click="fetchData()"
+          :loading="state.status === 'loading'">{{ state.status === 'init' ? ui.button.load :
+            ui.button.update }}</el-button>
+        <el-button icon="folder-opened" @click="saveExcel" class="focus:outline-none" :disabled="!gachaData"
+          type="success" plain>{{ ui.button.excel }}</el-button>
         <el-tooltip v-if="detail && state.status !== 'loading'" :content="ui.hint.newAccount" placement="bottom">
-          <el-button @click="newUser()" plain icon="plus"  class="focus:outline-none"></el-button>
+          <el-button @click="newUser()" plain icon="plus" class="focus:outline-none"></el-button>
         </el-tooltip>
         <el-tooltip v-if="state.status === 'updated'" :content="ui.hint.relaunchHint" placement="bottom">
-          <el-button @click="relaunch()" type="success" icon="refresh"   class="focus:outline-none" style="margin-left: 48px">{{ui.button.directUpdate}}</el-button>
+          <el-button @click="relaunch()" type="success" icon="refresh" class="focus:outline-none"
+            style="margin-left: 48px">{{ ui.button.directUpdate }}</el-button>
         </el-tooltip>
       </div>
       <div class="flex gap-2">
-        <el-select v-if="state.status !== 'loading' && state.dataMap && (state.dataMap.size > 1 || (state.dataMap.size === 1 && state.current === 0))" class="w-44"   @change="changeCurrent" v-model="uidSelectText">
-          <el-option
-            v-for="item of state.dataMap"
-            :key="item[0]"
-            :label="maskUid(item[0])"
-            :value="item[0]">
+        <el-select
+          v-if="state.status !== 'loading' && state.dataMap && (state.dataMap.size > 1 || (state.dataMap.size === 1 && state.current === 0))"
+          class="w-44" @change="changeCurrent" v-model="uidSelectText">
+          <el-option v-for="item of state.dataMap" :key="item[0]" :label="maskUid(item[0])" :value="item[0]">
           </el-option>
         </el-select>
-        <el-dropdown @command="optionCommand"  >
-          <el-button @click="showSetting(true)" class="focus:outline-none" plain type="info" icon="more"  >{{ui.button.option}}</el-button>
+        <el-dropdown @command="optionCommand">
+          <el-button @click="showSetting(true)" class="focus:outline-none" plain type="info" icon="more">{{
+            ui.button.option }}</el-button>
           <template #dropdown>
             <el-dropdown-menu>
-              <el-dropdown-item command="setting" icon="setting">{{ui.button.setting}}</el-dropdown-item>
-                <!--<el-dropdown-item :disabled="!allowClick() || state.status === 'loading'" command="url" icon="link">{{ui.button.url}}</el-dropdown-item>
+              <el-dropdown-item command="setting" icon="setting">{{ ui.button.setting }}</el-dropdown-item>
+              <!--<el-dropdown-item :disabled="!allowClick() || state.status === 'loading'" command="url" icon="link">{{ui.button.url}}</el-dropdown-item>
               <el-dropdown-item :disabled="!allowClick() || state.status === 'loading'" command="proxy" icon="position">{{ui.button.startProxy}}</el-dropdown-item> -->
-              <el-dropdown-item command="copyUrl" icon="DocumentCopy">{{ui.button.copyUrl}}</el-dropdown-item>
+              <el-dropdown-item command="copyUrl" icon="DocumentCopy">{{ ui.button.copyUrl }}</el-dropdown-item>
             </el-dropdown-menu>
           </template>
         </el-dropdown>
       </div>
     </div>
-    <p class="text-gray-400 my-2 text-xs">{{hint}}<el-button @click="(state.showCacheCleanDlg=true)" v-if="state.authkeyTimeout" style="margin-left: 8px;" size="small" plain round>{{ui.button.solution}}</el-button></p>
+    <p class="text-gray-400 my-2 text-xs">{{ hint }}<el-button @click="(state.showCacheCleanDlg = true)"
+        v-if="state.authkeyTimeout" style="margin-left: 8px;" size="small" plain round>{{ ui.button.solution
+        }}</el-button>
+    </p>
     <div v-if="detail" class="gap-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4">
       <div class="mb-4" v-for="(item, i) of detail" :key="i">
-        <div :class="{hidden: state.config.hideNovice && item[0] === '100'}">
-          <p class="text-center text-gray-600 my-2">{{typeMap.get(item[0])}}</p>
+        <div :class="{ hidden: state.config.hideNovice && item[0] === '100' }">
+          <p class="text-center text-gray-600 my-2">{{ typeMap.get(item[0]) }}</p>
           <pie-chart :data="item" :i18n="state.i18n" :typeMap="typeMap"></pie-chart>
           <gacha-detail :i18n="state.i18n" :data="item" :typeMap="typeMap"></gacha-detail>
         </div>
       </div>
     </div>
-    <Setting v-show="state.showSetting" :i18n="state.i18n" @changeLang="getI18nData()" @close="showSetting(false)"></Setting>
+    <Setting v-show="state.showSetting" :i18n="state.i18n" @changeLang="getI18nData()" @close="showSetting(false)">
+    </Setting>
 
     <el-dialog :title="ui.urlDialog.title" v-model="state.showUrlDlg" width="90%" custom-class="max-w-md">
-      <p class="mb-4 text-gray-500">{{ui.urlDialog.hint}}</p>
-      <el-input  type="textarea" :autosize="{minRows: 4, maxRows: 6}" :placeholder="ui.urlDialog.placeholder" v-model="state.urlInput" spellcheck="false"></el-input>
+      <p class="mb-4 text-gray-500">{{ ui.urlDialog.hint }}</p>
+      <el-input type="textarea" :autosize="{ minRows: 4, maxRows: 6 }" :placeholder="ui.urlDialog.placeholder"
+        v-model="state.urlInput" spellcheck="false"></el-input>
       <template #footer>
         <span class="dialog-footer">
-          <el-button  @click="state.showUrlDlg = false" class="focus:outline-none">{{ui.common.cancel}}</el-button>
-          <el-button  type="primary" @click="state.showUrlDlg = false, fetchData(state.urlInput)" class="focus:outline-none">{{ui.common.ok}}</el-button>
+          <el-button @click="state.showUrlDlg = false" class="focus:outline-none">{{ ui.common.cancel }}</el-button>
+          <el-button type="primary" @click="state.showUrlDlg = false, fetchData(state.urlInput)"
+            class="focus:outline-none">{{ ui.common.ok }}</el-button>
         </span>
       </template>
     </el-dialog>
 
     <el-dialog :title="ui.button.solution" v-model="state.showCacheCleanDlg" width="90%" custom-class="max-w-md">
-      <el-button plain icon="folder" type="primary" @click="openCacheFolder">{{ui.button.cacheFolder}}</el-button>
-      <p class="my-4 leading-2 text-gray-600 text-sm whitespace-pre-line">{{ui.extra.cacheClean}}</p>
-      <p class="my-2 text-gray-400 text-xs">{{ui.extra.findCacheFolder}}</p>
+      <el-button plain icon="folder" type="primary" @click="openCacheFolder">{{ ui.button.cacheFolder }}</el-button>
+      <p class="my-4 leading-2 text-gray-600 text-sm whitespace-pre-line">{{ ui.extra.cacheClean }}</p>
+      <p class="my-2 text-gray-400 text-xs">{{ ui.extra.findCacheFolder }}</p>
       <template #footer>
         <div class="dialog-footer text-center">
-          <el-button  type="primary" @click="state.showCacheCleanDlg = false" class="focus:outline-none">{{ui.common.ok}}</el-button>
+          <el-button type="primary" @click="state.showCacheCleanDlg = false" class="focus:outline-none">{{ ui.common.ok
+            }}</el-button>
         </div>
       </template>
     </el-dialog>
@@ -120,6 +131,12 @@ const allowClick = () => {
     return false
   }
   return true
+}
+let a = {
+  "key_mts_oversea_language_code": "cn",
+  "key_mts_cs_language_code": "en", "key_is_had_agree_privacy_protocol": "1",
+  "key_agree_privacy_protocol_version": "1636961916838347",
+  "key_token_now": "eyJ1aWQiOjAsIm9wZW5pZCI6IjA1OTcwOTBiODkyYWY3MDFjMDM4IiwiZXhwaXJlcyI6MTczNTU2ODg3MSwiaXNfZ3Vlc3QiOjAsInRpbngiOjEzfQ==.AnzZicSQMhLN8Wb80Zcmpk9p0NPIyxLXK7e1km8UNBg=",
 }
 
 const hint = computed(() => {

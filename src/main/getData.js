@@ -140,11 +140,11 @@ const detectGameType = async (userPath) => {
       path.join(
         userPath,
         "/AppData/LocalLow/SunBorn/",
-        "少女前线2：追放/Player.log"
+        "EXILIUM/Player.log"
       ),
       fs.constants.F_OK
     );
-    list.push("少女前线2：追放");
+    list.push("EXILIUM");
   } catch (e) {}
   if (config.logType) {
     if (config.logType === 2) {
@@ -194,7 +194,8 @@ const readLog = async () => {
         .reverse();
 
       // const url_reg = "\"k\":\"gacha_record_url\",\"v\":\"(.+?)\"";
-      const url_reg = '"gacha_record_url":"(.+?)"';
+      // const url_reg = '"gacha_record_url":"(.+?)"';
+      const url_reg = /,"k":"gacha_record_url","v":"(.+?)"/;
       let addr = undefined;
       for (let value of logText) {
         const reg_result = value.match(url_reg);
@@ -203,29 +204,37 @@ const readLog = async () => {
           break;
         }
       }
-
+      addr="https://gf2-gacha-record-us.sunborngame.com/list"
       if (!addr) {
         throw Error("Url not found");
       }
       // console.log(addr);
-
       // Gacha record address is most likely the following, but implemented a regex search function just in case.
       // const addr = "https://gf2-gacha-record.sunborngame.com/list";
       gachaUrl = addr;
       const accessTokenLineIndex = logText
         .findIndex((x) =>
           x.startsWith(
-            'Response = {"code":0,"msg":"OK","data":{"access_token":"'
+            '[MicaSDK] -- sdkLocalDataJoStr = '
           )
         )
+      let str=logText[accessTokenLineIndex].replace("[MicaSDK] -- sdkLocalDataJoStr = ", "")
+      let res=JSON.parse(str)
+      console.log(res);
+      let account=JSON.parse(res.key_user_now)
+        // let regexToken = /"key_token_now":\s*"([^"]+)"/;
+        // let regexAccount = /"key_token_now":\s*"([^"]+)"/;
       // 取登录用户接口入参做账号
-      const loginParasLine = logText[accessTokenLineIndex + 1].replace("jsonParamsStr = ", "");
-      const loginParasJson = JSON.parse(loginParasLine)
-      const account = loginParasJson.phone_number || loginParasJson.email
-      const accessTokenLine = logText[accessTokenLineIndex].replace("Response = ", "");
-      const accessTokenJson = JSON.parse(accessTokenLine);
-      const accessToken = accessTokenJson.data.access_token;
-      return { url: addr, accessToken: accessToken, account};
+      // const loginParasLine = logText[accessTokenLineIndex + 1].replace("jsonParamsStr = ", "");
+      // const loginParasJson = JSON.parse(loginParasLine)
+      // const account = loginParasJson.phone_number || loginParasJson.email
+      // const accessTokenLine = logText[accessTokenLineIndex].replace("Response = ", "");
+      // const accessTokenJson = JSON.parse(accessTokenLine);
+      // const accessToken = accessTokenJson.data.access_token;
+    // const accessToken=logText[accessTokenLineIndex + 1].match(regexToken)[1];
+    let result= { url: addr, accessToken: account.access_token, account: account.phoneNum||account.email };
+    console.log(result);
+      return result
     });
     const result = await Promise.all(promises);
     for (let url of result) {
