@@ -132,13 +132,6 @@ const allowClick = () => {
   }
   return true
 }
-let a = {
-  "key_mts_oversea_language_code": "cn",
-  "key_mts_cs_language_code": "en", "key_is_had_agree_privacy_protocol": "1",
-  "key_agree_privacy_protocol_version": "1636961916838347",
-  "key_token_now": "eyJ1aWQiOjAsIm9wZW5pZCI6IjA1OTcwOTBiODkyYWY3MDFjMDM4IiwiZXhwaXJlcyI6MTczNTU2ODg3MSwiaXNfZ3Vlc3QiOjAsInRpbngiOjEzfQ==.AnzZicSQMhLN8Wb80Zcmpk9p0NPIyxLXK7e1km8UNBg=",
-}
-
 const hint = computed(() => {
   const data = state.dataMap.get(state.current)
   if (!state.i18n) {

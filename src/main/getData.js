@@ -192,25 +192,18 @@ const readLog = async () => {
       )
         .split(/\r?\n/)
         .reverse();
-
-      // const url_reg = "\"k\":\"gacha_record_url\",\"v\":\"(.+?)\"";
-      // const url_reg = '"gacha_record_url":"(.+?)"';
-      const url_reg = /,"k":"gacha_record_url","v":"(.+?)"/;
-      let addr = undefined;
+        const regex = /"k":"gacha_record_url","v":"(https:\/\/[^\"]+)"/;
+        let addr = undefined;
       for (let value of logText) {
-        const reg_result = value.match(url_reg);
+        const reg_result = value.match(regex);
         if (reg_result) {
           addr = reg_result[1];
           break;
         }
       }
-      addr="https://gf2-gacha-record-us.sunborngame.com/list"
       if (!addr) {
         throw Error("Url not found");
       }
-      // console.log(addr);
-      // Gacha record address is most likely the following, but implemented a regex search function just in case.
-      // const addr = "https://gf2-gacha-record.sunborngame.com/list";
       gachaUrl = addr;
       const accessTokenLineIndex = logText
         .findIndex((x) =>
