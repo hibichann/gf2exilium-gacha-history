@@ -18,7 +18,7 @@ const config = require("./config");
 const i18n = require("./i18n");
 const { enableProxy, disableProxy } = require("./module/system-proxy");
 const mitmproxy = require("./module/node-mitmproxy");
-const { NameRarityDictionary } = require("./datatable");
+const { getNameRarityDictionary } = require("./datatable");
 
 const dataMap = new Map();
 var gachaUrl;
@@ -32,11 +32,11 @@ const saveData = async (data, url) => {
   await saveJSON(`gacha-list-${data.account}.json`, obj);
 };
 
-const defaultTypeMap = new Map([
-  ["1", i18n.ui.poolname.standard],
-  ["3", i18n.ui.poolname.target],
-  ["4", i18n.ui.poolname.military],
-]);
+// const defaultTypeMap = new Map([
+//   ["1", i18n.ui.poolname.standard],
+//   ["3", i18n.ui.poolname.target],
+//   ["4", i18n.ui.poolname.military],
+// ]);
 
 let localDataReaded = false;
 /**
@@ -206,7 +206,6 @@ const readLog = async () => {
         )
       let str=logText[accessTokenLineIndex].replace("[MicaSDK] -- sdkLocalDataJoStr = ", "")
       let res=JSON.parse(str)
-      console.log(res);
       let account=JSON.parse(res.key_user_now)
         // let regexToken = /"key_token_now":\s*"([^"]+)"/;
         // let regexAccount = /"key_token_now":\s*"([^"]+)"/;
@@ -219,7 +218,6 @@ const readLog = async () => {
       // const accessToken = accessTokenJson.data.access_token;
     // const accessToken=logText[accessTokenLineIndex + 1].match(regexToken)[1];
     let result= { url: addr, accessToken: account.access_token, account: account.phoneNum||account.email };
-    console.log(result);
       return result
     });
     const result = await Promise.all(promises);
@@ -427,8 +425,14 @@ const fetchData = async () => {
 
   const result = new Map();
   const typeMap = new Map();
+  const defaultTypeMap = new Map([
+    ["1", i18n.ui.poolname.standard],
+    ["3", i18n.ui.poolname.target],
+    ["4", i18n.ui.poolname.military],
+  ]);
   for (const type of defaultTypeMap) {
     const list = await getGachaLogs(type[0], type[1], account, ua);
+    const NameRarityDictionary=await getNameRarityDictionary();
     const logs = list.map((item) => {
       var tabledata = NameRarityDictionary[item.item];
       return [

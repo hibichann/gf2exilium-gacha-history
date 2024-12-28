@@ -31,7 +31,7 @@ const getLocalConfig = async () => {
       item[1] = ''
     }
   })
-  Object.assign(config, configTemp)
+  return Object.assign(config, configTemp)
 }
 
 getLocalConfig()
@@ -72,7 +72,9 @@ const configProxy = new Proxy(config, {
       return saveConfig
     } else if (prop === 'value') {
       return getPlainConfig
-    }
+    } else if (prop === 'currentValue') {
+      return getLocalConfig
+}
     return obj[prop]
   }
 })

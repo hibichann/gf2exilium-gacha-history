@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+message LangPackageTableEnusDataTable {
+    repeated LangPackageTableEnusData Data = 1;
+}
+
+message LangPackageTableEnusData {
+    int64 Id = 1;
+    string Content = 2;
+}

@@ -90,7 +90,7 @@ const data = reactive({
 })
 
 const settingForm = reactive({
-  lang: 'zh-cn',
+  lang: 'en-us',
   logType: 1,
   proxyMode: false,
   autoUpdate: true,

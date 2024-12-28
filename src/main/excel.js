@@ -22,7 +22,7 @@ function getTimeString() {
 }
 
 const start = async () => {
-  const { header, customFont, filePrefix, fileType } = i18n.excel;
+  const { header, customFont, filePrefix, fileType,cols } = i18n.excel;
   const { dataMap, current } = getData();
   const data = dataMap.get(current);
   // https://github.com/sunfkny/genshin-gacha-export-js/blob/main/index.js
@@ -32,7 +32,7 @@ const start = async () => {
     const sheet = workbook.addWorksheet(name, {
       views: [{ state: "frozen", ySplit: 1 }],
     });
-    let width = [24, 14, 8, 8, 8, 8, 8];
+    let width = [24, 34, 12, 12, 12, 12, 12];
     const excelKeys = [
       "time",
       "name",
@@ -61,7 +61,7 @@ const start = async () => {
       var time = log[5];
       log[0] = time;
       log[1] = namE;
-      log[2] = isCharacter ? "角色" : "武器";
+      log[2] = isCharacter ? cols.character : cols.weapon;
       log[3] = rank;
       log[6] = pool;
       total += 1;

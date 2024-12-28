@@ -72,14 +72,3 @@ const i18n = new Proxy(raw, {
 })
 
 module.exports = i18n
-
-
-
-
-
-
-
-
-
-
-
