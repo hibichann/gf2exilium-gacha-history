@@ -26,14 +26,12 @@
         <el-dropdown @command="optionCommand">
           <el-button @click="showSetting(true)" class="focus:outline-none" plain type="info" icon="more">{{
             ui.button.option }}</el-button>
-          <template #dropdown>
+          <!-- <template #dropdown>
             <el-dropdown-menu>
               <el-dropdown-item command="setting" icon="setting">{{ ui.button.setting }}</el-dropdown-item>
-              <!--<el-dropdown-item :disabled="!allowClick() || state.status === 'loading'" command="url" icon="link">{{ui.button.url}}</el-dropdown-item>
-              <el-dropdown-item :disabled="!allowClick() || state.status === 'loading'" command="proxy" icon="position">{{ui.button.startProxy}}</el-dropdown-item> -->
               <el-dropdown-item command="copyUrl" icon="DocumentCopy">{{ ui.button.copyUrl }}</el-dropdown-item>
             </el-dropdown-menu>
-          </template>
+          </template> -->
         </el-dropdown>
       </div>
     </div>
@@ -43,7 +41,7 @@
     </p>
     <div v-if="detail" class="gap-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4">
       <div class="mb-4" v-for="(item, i) of detail" :key="i">
-        <div :class="{ hidden: state.config.hideNovice && item[0] === '100' }">
+        <div :class="{ hidden: state.config.hideNovice && item[0] === '5' }">
           <p class="text-center text-gray-700 my-4 font-bold text-3xl">{{ typeMap.get(item[0]) }}</p>
           <pie-chart :data="item" :i18n="state.i18n" :typeMap="typeMap"></pie-chart>
           <gacha-detail :i18n="state.i18n" :data="item" :typeMap="typeMap"></gacha-detail>
@@ -156,6 +154,7 @@ const hint = computed(() => {
 const detail = computed(() => {
   const data = state.dataMap.get(state.current)
   if (data) {
+    console.log(gachaDetail(data.result))
     return gachaDetail(data.result)
   }
 })
@@ -290,3 +289,8 @@ onMounted(async () => {
   await updateConfig()
 })
 </script>
+<style>
+.hidden{
+  display: none;
+}
+</style>

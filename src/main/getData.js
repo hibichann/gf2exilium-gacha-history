@@ -429,6 +429,7 @@ const fetchData = async () => {
     ["1", i18n.ui.poolname.standard],
     ["3", i18n.ui.poolname.target],
     ["4", i18n.ui.poolname.military],
+    ["5", i18n.ui.poolname.beginner],
   ]);
   for (const type of defaultTypeMap) {
     const list = await getGachaLogs(type[0], type[1], account, ua);

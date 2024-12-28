@@ -72,6 +72,7 @@ const updateChart = throttle(() => {
   }
 
   const colon = props.i18n.symbol.colon;
+  console.log(props.data);
   const result = parseData(props.data[1], props.data[0]);
 
   const option = {

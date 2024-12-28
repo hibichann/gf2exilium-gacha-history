@@ -83,12 +83,13 @@
   "excel.customFont": "微软雅黑",
   "excel.filePrefix": "追放采购记录",
   "excel.fileType": "Excel文件",
-  "excel.character": "角色",
-  "excel.weapon": "武器",
+  "excel.cols.character": "角色",
+  "excel.cols.weapon": "武器",
   "ui.extra.cacheClean": "1. 确认是否已经打开游戏内的抽卡历史记录，如果仍然出现“身份认证已过期”的错误，再尝试下面的步骤\n2. 关闭追放的游戏窗口\n3. 点击上方的“打开缓存文件夹”按钮，打开Cache文件夹\n4. 删除Player.log文件\n5. 启动追放游戏，打开游戏内抽卡历史记录页面\n6. 关闭这个对话框，再点击“更新数据”按钮",
   "ui.extra.findCacheFolder": "如果点“打开缓存文件夹”按钮没有反应，可以手动找到游戏的网页缓存文件夹，目录为“你的用户主目录\\Appdata\\LocalLow\\SunBorn\\少女前线2：追放”",
   "ui.extra.urlCopied": "URL已复制",
   "ui.poolname.target": "定向采购",
   "ui.poolname.military": "军备升级",
-  "ui.poolname.standard": "常规采购"
+  "ui.poolname.standard": "常规采购",
+  "ui.poolname.beginner": "新手采购"
 }
