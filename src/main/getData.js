@@ -33,17 +33,10 @@ const saveData = async (data, url) => {
 };
 
 const defaultTypeMap = new Map([
-  ["1", "常规采购"],
-  ["3", "定向采购"],
-  ["4", "军备提升"],
+  ["1", i18n.ui.poolname.standard],
+  ["3", i18n.ui.poolname.target],
+  ["4", i18n.ui.poolname.military],
 ]);
-/*
-  ["5001", "军备提升α"],
-  ["2001", "军备提升β"],
-  ["3001", "定向采购β"],
-  ["6001", "定向采购α"],
-  ["1001", "常规采购"],
- */
 
 let localDataReaded = false;
 /**

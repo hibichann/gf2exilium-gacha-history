@@ -223,11 +223,7 @@ const getGamePath = () => {
   try {
     var lines = fs
       .readFileSync(
-        path.join(
-          userPath,
-          "/AppData/LocalLow/SunBorn/",
-          "少女前线2：追放/Player.log"
-        ),
+        path.join(userPath, "/AppData/LocalLow/SunBorn/", "EXILIUM/Player.log"),
         "utf8"
       )
       .split(/\r?\n/);
@@ -235,6 +231,7 @@ const getGamePath = () => {
       .find((x) => x.startsWith("[Subsystems] Discovering subsystems at path "))
       .replace("[Subsystems] Discovering subsystems at path ", "")
       .replace("/UnitySubsystems", "");
+    gamePath = path.normalize(gamePath);
     return gamePath;
   } catch (e) {
     console.log(e);

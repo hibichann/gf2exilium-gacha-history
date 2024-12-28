@@ -27,7 +27,7 @@ const Weapons = (function () {
     path.join(gamePath, "LocalCache/Data/Table/GunWeaponData.bytes")
   );
   const msg = protobuf.GunWeaponDataTable.decode(
-    bytes.subarray(bytes.readInt32LE())
+    bytes.subarray(bytes.readInt32LE() + 1)
   );
   return msg["Data"];
 })();
