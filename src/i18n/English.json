@@ -19,7 +19,7 @@
   "ui.hint.relaunchHint": "The update has been completed, it will take effect after clicking the button to restart the tool",
   "ui.win.title": "Exilium Recruit History Exporter",
   "ui.data.total": "Total",
-  "ui.data.times": "Pulls",
+  "ui.data.times": "Pulls.",
   "ui.data.sum": "Accumulated",
   "ui.data.no5star": "pulls without a 5 star",
   "ui.data.character": "Character",

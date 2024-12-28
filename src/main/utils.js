@@ -22,14 +22,16 @@ const userPath = app.getPath("userData");
 let win = null;
 const initWindow = () => {
   let mainWindowState = windowStateKeeper({
-    defaultWidth: 888,
-    defaultHeight: 550,
+    defaultWidth: 1200,
+    defaultHeight: 750,
   });
   win = new BrowserWindow({
     x: mainWindowState.x,
     y: mainWindowState.y,
     width: mainWindowState.width,
     height: mainWindowState.height,
+    minWidth: 1200,  // 设置最小宽度
+    minHeight: 750, // 设置最小高度
     webPreferences: {
       contextIsolation: false,
       nodeIntegration: true,

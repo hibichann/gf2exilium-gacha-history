@@ -1,5 +1,5 @@
 <template>
-  <div class="chart mb-2 relative h-48 lg:h-56 xl:h-64 2xl:h-72">
+  <div class="chart mb-2 relative" style="height: 300px;">
     <div ref="chart" class="absolute inset-0"></div>
   </div>
 </template>
@@ -90,13 +90,20 @@ const updateChart = throttle(() => {
     },
     selectedMode: "single",
     color: result[1],
+      emphasis: {
+        itemStyle: {
+          shadowBlur: 10,
+          shadowOffsetX: 0,
+          shadowColor: 'rgba(0, 0, 0, 0.5)'
+        }
+      },
     series: [
       {
         name: props.typeMap.get(props.data[0]),
         type: "pie",
-        top: 50,
+        top: 80,
         startAngle: 70,
-        radius: ["0%", "90%"],
+        radius: ["50%", "90%"],
         // avoidLabelOverlap: false,
         labelLine: {
           length: 0,

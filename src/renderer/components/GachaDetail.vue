@@ -1,16 +1,16 @@
 <template>
-  <p class="text-gray-500 text-xs mb-2 text-center whitespace-nowrap">
+  <p class="text-gray-500 text-sm mb-2 font-bold text-center whitespace-nowrap">
     <span class="mx-2" :title="new Date(detail.date[0]).toLocaleString()">{{new Date(detail.date[0]).toLocaleDateString()}}</span>
     -
     <span class="mx-2" :title="new Date(detail.date[1]).toLocaleString()">{{new Date(detail.date[1]).toLocaleDateString()}}</span>
   </p>
-  <p class="text-gray-600 text-xs mb-1">
+  <p class="text-gray-900 text-sm mb-1 font-bold">
     <span class="mr-1">{{text.total}}
       <span class="text-blue-600">{{detail.total}}</span> {{text.times}}
     </span>
     <span v-if="type !== '100'">{{text.sum}}<span class="mx-1 text-green-600">{{detail.countMio}}</span>{{text.no5star}}</span>
   </p>
-  <p class="text-gray-600 text-xs mb-1">
+  <p class="text-gray-600 text-sm mb-1">
     <span :title="`${text.character}${colon}${detail.count5c}\n${text.weapon}${colon}${detail.count5w}`" class="mr-3 whitespace-pre cursor-help text-yellow-500">
       <span class="min-w-10 inline-block">{{text.star5}}{{colon}}{{detail.count5}}</span>
       [{{percent(detail.count5, detail.total)}}]
@@ -25,7 +25,7 @@
     </span>
   </p>
 
-  <p class="text-gray-600 text-xs mb-1" v-if="detail.ssrPos.length">
+  <p class="text-gray-600 text-sm mb-1" v-if="detail.ssrPos.length">
     {{text.history}}{{colon}}
     <span :title="`${item[2]}${item[3] === '400' ? '\n' + props.i18n.excel.wish2 : ''}`" :class="{wish2: item[3] === '400'}" class="cursor-help mr-1" :style="`color:${colorList[index]}`"
       v-for="(item, index) of detail.ssrPos" :key="item"
@@ -33,7 +33,7 @@
       {{item[0]}}[{{item[1]}}]
     </span>
   </p>
-  <p v-if="detail.ssrPos.length" class="text-gray-600 text-xs">{{text.average}}{{colon}}<span class="text-green-600">{{avg5(detail.ssrPos)}}</span></p>
+  <p v-if="detail.ssrPos.length" class="text-gray-600 text-sm">{{text.average}}{{colon}}<span class="text-green-600">{{avg5(detail.ssrPos)}}</span></p>
 </template>
 
 <script setup>
