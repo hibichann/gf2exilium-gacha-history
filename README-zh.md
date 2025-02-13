@@ -1,9 +1,12 @@
-# 追放采购记录导出工具
-
 fork自 https://github.com/EtherealAO/exilium-recruit-export
 ！！！！！！！！
 以下是原文
-
+<div>
+   <br/>
+   <br/>
+   <br/>
+</div>
+# 追放采购记录导出工具
 
 中文
 修改自原神祈愿记录导出工具[Github](https://github.com/biuuu/genshin-wish-export)
