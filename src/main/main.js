@@ -3,6 +3,7 @@ const { initWindow } = require('./utils')
 const { disableProxy, proxyStatus } = require('./module/system-proxy')
 require('./getData')
 require('./excel')
+require('./importJSON')
 require('./UIGFJson')
 // require('./gists')
 const { getUpdateInfo } = require('./update/index')
@@ -12,10 +13,13 @@ let win = null
 
 function createWindow() {
   win = initWindow()
+  console.log(isDev,win)
   win.setMenuBarVisibility(false)
   isDev ? win.loadURL(`http://localhost:${process.env.PORT}`) : win.loadFile('dist/electron/renderer/index.html')
   if (isDev) {
-    win.webContents.openDevTools({ mode: 'undocked', activate: true })
+    win.webContents.once('did-finish-load', () => {
+      win.webContents.openDevTools({ mode: 'undocked', activate: true });
+    });
   }
 }
 
