@@ -1,5 +1,10 @@
 # 追放采购记录导出工具
 
+fork自 https://github.com/EtherealAO/exilium-recruit-export
+！！！！！！！！
+以下是原文
+
+
 中文
 修改自原神祈愿记录导出工具[Github](https://github.com/biuuu/genshin-wish-export)
 一个使用 Electron 制作的小工具，需要在 Windows 64位操作系统上运行。
